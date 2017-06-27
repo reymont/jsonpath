@@ -372,7 +372,7 @@ func Test_jsonpath_parse_token(t *testing.T) {
 
 		if op == "range" {
 			if args_v, ok := args.([2]interface{}); ok == true {
-				fmt.Println(args_v)
+				//fmt.Println(args_v)
 				exp_from := exp_args.([2]interface{})[0]
 				exp_to := exp_args.([2]interface{})[1]
 				if args_v[0] != exp_from {
@@ -391,7 +391,7 @@ func Test_jsonpath_parse_token(t *testing.T) {
 
 		if op == "filter" {
 			if args_v, ok := args.(string); ok == true {
-				fmt.Println(args_v)
+				//fmt.Println(args_v)
 				if exp_args.(string) != args_v {
 					t.Errorf("len(args) not expected: (got)%v != (exp)%v", len(args_v), len(exp_args.([]string)))
 					return
@@ -409,7 +409,7 @@ func Test_jsonpath_get_key(t *testing.T) {
 		"key": 1,
 	}
 	res, err := get_key(obj, "key")
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err != nil {
 		t.Errorf("failed to get key: %v", err)
 		return
@@ -420,7 +420,7 @@ func Test_jsonpath_get_key(t *testing.T) {
 	}
 
 	res, err = get_key(obj, "hah")
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err == nil {
 		t.Errorf("key error not raised")
 		return
@@ -432,7 +432,7 @@ func Test_jsonpath_get_key(t *testing.T) {
 
 	obj2 := 1
 	res, err = get_key(obj2, "key")
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err == nil {
 
 		t.Errorf("object is not map error not raised")
@@ -441,7 +441,7 @@ func Test_jsonpath_get_key(t *testing.T) {
 	obj3 := map[string]string{"key": "hah"}
 	res, err = get_key(obj3, "key")
 	if res_v, ok := res.(string); ok != true || res_v != "hah" {
-		fmt.Println(err, res)
+		//fmt.Println(err, res)
 		t.Errorf("map[string]string support failed")
 	}
 
@@ -454,13 +454,13 @@ func Test_jsonpath_get_key(t *testing.T) {
 		},
 	}
 	res, err = get_key(obj4, "a")
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 }
 
 func Test_jsonpath_get_idx(t *testing.T) {
 	obj := []interface{}{1, 2, 3, 4}
 	res, err := get_idx(obj, 0)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err != nil {
 		t.Errorf("failed to get_idx(obj,0): %v", err)
 		return
@@ -470,19 +470,19 @@ func Test_jsonpath_get_idx(t *testing.T) {
 	}
 
 	res, err = get_idx(obj, 2)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if v, ok := res.(int); ok != true || v != 3 {
 		t.Errorf("failed to get int 3")
 	}
 	res, err = get_idx(obj, 4)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err == nil {
 		t.Errorf("index out of range  error not raised")
 		return
 	}
 
 	res, err = get_idx(obj, -1)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err != nil {
 		t.Errorf("failed to get_idx(obj, -1): %v", err)
 		return
@@ -492,13 +492,13 @@ func Test_jsonpath_get_idx(t *testing.T) {
 	}
 
 	res, err = get_idx(obj, -4)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if v, ok := res.(int); ok != true || v != 1 {
 		t.Errorf("failed to get int 1")
 	}
 
 	res, err = get_idx(obj, -5)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err == nil {
 		t.Errorf("index out of range  error not raised")
 		return
@@ -513,7 +513,7 @@ func Test_jsonpath_get_idx(t *testing.T) {
 
 	obj2 := []int{1, 2, 3, 4}
 	res, err = get_idx(obj2, 0)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err != nil {
 		t.Errorf("failed to get_idx(obj2,0): %v", err)
 		return
@@ -527,7 +527,7 @@ func Test_jsonpath_get_range(t *testing.T) {
 	obj := []int{1, 2, 3, 4, 5}
 
 	res, err := get_range(obj, 0, 2)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err != nil {
 		t.Errorf("failed to get_range: %v", err)
 	}
@@ -537,11 +537,11 @@ func Test_jsonpath_get_range(t *testing.T) {
 
 	obj1 := []interface{}{1, 2, 3, 4, 5}
 	res, err = get_range(obj1, 3, -1)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err != nil {
 		t.Errorf("failed to get_range: %v", err)
 	}
-	fmt.Println(res.([]interface{}))
+	//fmt.Println(res.([]interface{}))
 	if res.([]interface{})[0] != 4 || res.([]interface{})[1] != 5 {
 		t.Errorf("failed get_range: %v, expect: [4,5]", res)
 	}
@@ -566,7 +566,7 @@ func Test_jsonpath_get_range(t *testing.T) {
 
 	obj2 := 2
 	res, err = get_range(obj2, 0, 1)
-	fmt.Println(err, res)
+	//fmt.Println(err, res)
 	if err == nil {
 		t.Errorf("object is Slice error not raised")
 	}
@@ -575,7 +575,7 @@ func Test_jsonpath_get_range(t *testing.T) {
 func Test_jsonpath_types_eval(t *testing.T) {
 	fset := token.NewFileSet()
 	res, err := types.Eval(fset, nil, 0, "1 < 2")
-	fmt.Println(err, res, res.Type, res.Value, res.IsValue())
+	//fmt.Println(err, res, res.Type, res.Value, res.IsValue())
 }
 
 var tcase_parse_filter = []map[string]interface{}{
@@ -773,7 +773,7 @@ var tcase_eval_filter = []map[string]interface{}{
 
 func Test_jsonpath_eval_filter(t *testing.T) {
 	for idx, tcase := range tcase_eval_filter {
-		fmt.Println("------------------------------")
+		//fmt.Println("------------------------------")
 		obj := tcase["obj"].(map[string]interface{})
 		root := tcase["root"].(map[string]interface{})
 		lp := tcase["lp"].(string)
