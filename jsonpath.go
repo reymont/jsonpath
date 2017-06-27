@@ -441,7 +441,7 @@ func parse_filter(filter string) (lp string, op string, rp string, err error) {
 func eval_filter(obj, root interface{}, lp, op, rp string) (res bool, err error) {
 	var lp_v interface{}
 	//fmt.Println(obj, root)
-	fmt.Printf("lp: %v, op: %v, rp: %v\n", lp, op, rp)
+	//fmt.Printf("lp: %v, op: %v, rp: %v\n", lp, op, rp)
 	if strings.HasPrefix(lp, "@.") {
 		//fmt.Println("@. ----------------")
 		lp_v, err = filter_get_from_explicit_path(obj, lp)
@@ -464,7 +464,7 @@ func eval_filter(obj, root interface{}, lp, op, rp string) (res bool, err error)
 		} else {
 			rp_v = rp
 		}
-		fmt.Printf("lp_v: %v, rp_v: %v\n", lp_v, rp_v)
+		//fmt.Printf("lp_v: %v, rp_v: %v\n", lp_v, rp_v)
 		return cmp_any(lp_v, rp_v, op)
 	}
 }
